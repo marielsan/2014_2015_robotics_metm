@@ -23,42 +23,32 @@ MyRobot::MyRobot() : DifferentialWheels()
     _my_compass = getCompass("compass");
     _my_compass->enable(_time_step);
 
+
+      // Loop for enable the sensors
+    for (int i=0; i<NUM_DISTANCE_SENSOR; i++) {
+        _distance_sensor[i]->enable(_time_step);}
+
+
+
+
     // get sensors and enable
-    _distance_sensor[0] = getDistanceSensor("ds0");
-    _distance_sensor[0]->enable(_time_step);
-    _distance_sensor[1] = getDistanceSensor("ds1");
-    _distance_sensor[1]->enable(_time_step);
-    _distance_sensor[2] = getDistanceSensor("ds2");
-    _distance_sensor[2]->enable(_time_step);
-    _distance_sensor[3] = getDistanceSensor("ds3");
-    _distance_sensor[3]->enable(_time_step);
-    _distance_sensor[4] = getDistanceSensor("ds4");
-    _distance_sensor[4]->enable(_time_step);
-    _distance_sensor[5] = getDistanceSensor("ds5");
-    _distance_sensor[5]->enable(_time_step);
-    _distance_sensor[6] = getDistanceSensor("ds6");
-    _distance_sensor[6]->enable(_time_step);
-    _distance_sensor[7] = getDistanceSensor("ds7");
-    _distance_sensor[7]->enable(_time_step);
-    _distance_sensor[8] = getDistanceSensor("ds8");
-    _distance_sensor[8]->enable(_time_step);
-    _distance_sensor[9] = getDistanceSensor("ds9");
-    _distance_sensor[9]->enable(_time_step);
-    _distance_sensor[10] = getDistanceSensor("ds10");
-    _distance_sensor[10]->enable(_time_step);
-    _distance_sensor[11] = getDistanceSensor("ds11");
-    _distance_sensor[11]->enable(_time_step);
-    _distance_sensor[12] = getDistanceSensor("ds12");
-    _distance_sensor[12]->enable(_time_step);
-    _distance_sensor[13] = getDistanceSensor("ds13");
-    _distance_sensor[13]->enable(_time_step);
-    _distance_sensor[14] = getDistanceSensor("ds14");
-    _distance_sensor[14]->enable(_time_step);
-    _distance_sensor[15] = getDistanceSensor("ds15");
-    _distance_sensor[15]->enable(_time_step);
 
-
-
+     _distance_sensor[0] = getDistanceSensor("ds0");
+      _distance_sensor[1] = getDistanceSensor("ds1");
+     _distance_sensor[2] = getDistanceSensor("ds2");
+     _distance_sensor[3] = getDistanceSensor("ds3");
+     _distance_sensor[4] = getDistanceSensor("ds4");
+     _distance_sensor[5] = getDistanceSensor("ds5");
+     _distance_sensor[6] = getDistanceSensor("ds6");
+     _distance_sensor[7] = getDistanceSensor("ds7");
+     _distance_sensor[8] = getDistanceSensor("ds8");
+     _distance_sensor[9] = getDistanceSensor("ds9");
+     _distance_sensor[10] = getDistanceSensor("ds10");
+     _distance_sensor[11] = getDistanceSensor("ds11");
+     _distance_sensor[12] = getDistanceSensor("ds12");
+     _distance_sensor[13] = getDistanceSensor("ds13");
+     _distance_sensor[14] = getDistanceSensor("ds14");
+     _distance_sensor[15] = getDistanceSensor("ds15");
 }
 
 //////////////////////////////////////////////
@@ -85,6 +75,7 @@ void MyRobot::run()
 
     while (step(_time_step) != -1) {
         // Read the sensors
+
         ir0_val = _distance_sensor[0]->getValue();
         ir1_val = _distance_sensor[1]->getValue();
         ir2_val = _distance_sensor[2]->getValue();
@@ -106,12 +97,12 @@ void MyRobot::run()
 
 
 
-        // Control logic of the robot
+        // Control logic of the robot  //Condicion para usar la brujula
+
         if(ir0_val + ir1_val + ir2_val + ir3_val + ir4_val +
                 ir5_val + ir6_val + ir7_val + ir8_val +
                 + ir9_val + ir10_val + ir11_val+ ir12_val+
-                ir13_val + ir14_val + ir15_val <=360)   //Condicion para usar la brujula
-
+                ir13_val + ir14_val + ir15_val <=360)
         {
             // Convert compass bearing vector to angle, in degrees
             compass_angle = convert_bearing_to_degrees(compass_val);
@@ -138,18 +129,20 @@ void MyRobot::run()
 
         else{  if ((ir1_val > DISTANCE_LIMIT) || (ir14_val > DISTANCE_LIMIT) ||(ir0_val > DISTANCE_LIMIT)||(ir15_val > DISTANCE_LIMIT))
             {_mode = WALL_FOLLOWER;
-                cout<<"Delante2"<<endl;}
+                cout<<"Delante"<<endl;}
             if (ir9_val >DISTANCE_LIMIT+200)
             {_mode = TURN_LEFT;
-                cout <<"Torciendo izq"<<endl;
+                cout <<"Turning left"<<endl;
                 if (ir12_val >DISTANCE_LIMIT+300  )
                 {_mode = TURN_LEFTF;
-                    cout <<"Torciendo izqmucho"<<endl;}}
+                    cout <<"Turning left "<<endl;}}
             if (ir6_val > DISTANCE_LIMIT+200  ) {
                 _mode = TURN_RIGHT ;
-                cout << "Turning left." << endl;
+                cout << "Turning right." << endl;
                 if(ir3_val > DISTANCE_LIMIT+300)
                     _mode= TURN_RIGHTF;}
+
+
 
         }
 

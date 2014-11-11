@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <sstream>
 #include <webots/DifferentialWheels.hpp>
 
 using namespace std;
@@ -26,7 +27,7 @@ private:
     DistanceSensor * _distance_sensor[NUM_DISTANCE_SENSOR];
 
     Compass * _my_compass;     //Brujula
-    double _left_speed, _right_speed;
+    double _left_speed, _right_speed; // variables de Velocidad
 
     enum Mode {
         STOP,
@@ -42,8 +43,6 @@ private:
     Mode _mode;
 
 public:
-    // You may need to define your private methods or variables, like
-    //  Constructors, helper functions, etc.
 
     /**
          * @brief Empty constructor of the class.
@@ -61,7 +60,7 @@ public:
     void run();
 
     /**
-          * @brief An example for converting bearing vector from compass to angle (in degrees).
+          * @brief Funcion para los angulos.
           */
     double convert_bearing_to_degrees(const double* in_vector);
 };

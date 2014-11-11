@@ -9,8 +9,8 @@ WorldInfo {
   northDirection -1 0 -1
 }
 Viewpoint {
-  orientation 0.512599 0.616029 0.598122 4.23925
-  position -3.73674 33.0427 2.41267
+  orientation 0.353627 0.840699 0.410089 4.58801
+  position -23.4035 24.8316 1.27228
   follow "pioneer2"
 }
 Background {
@@ -77,16 +77,6 @@ PointLight {
   intensity 0.1
   location 6 6 5
   radius 1000
-}
-Solid {
-  translation 0 1 0
-  children [
-    Shape {
-      geometry Box {
-        size 6.5 2 6.5
-      }
-    }
-  ]
 }
 PointLight {
   ambientIntensity 4
@@ -171,6 +161,27 @@ Solid {
   ]
   boundingObject Box {
     size 0.2 2 20
+  }
+  locked TRUE
+}
+Solid {
+  translation 0 1 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          ambientIntensity 0.1
+          diffuseColor 1 1 1
+        }
+      }
+      geometry Box {
+        size 6.5 2 6.5
+      }
+    }
+  ]
+  name "objeto"
+  boundingObject Box {
+    size 6.5 2 6.5
   }
   locked TRUE
 }
@@ -1040,7 +1051,7 @@ DEF PIONEER2 DifferentialWheels {
     ]
   }
   battery [
-    999473, 1e+06, 1e+06
+    999477, 1e+06, 1e+06
   ]
   cpuConsumption 0.2
   motorConsumption 0.1
@@ -1048,4 +1059,6 @@ DEF PIONEER2 DifferentialWheels {
   wheelRadius 0.0825
   speedUnit 0.1
   slipNoise 0.4
+  encoderNoise 0
+  encoderResolution 5
 }

@@ -1888,7 +1888,6 @@ DEF PIONEER2 DifferentialWheels {
       }
     ]
   }
-  controller "obstacle_avoidance"
   battery [
     999238, 1e+06, 1e+06
   ]
